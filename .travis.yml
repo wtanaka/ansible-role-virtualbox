@@ -9,7 +9,7 @@ services:
 script:
   - >
     wget -O- bit.ly/ansibletest | env
-    ANSIBLE_VERSIONS="1.4.4 1.5.4 1.9.2 2.1.0.0"
+    ANSIBLE_VERSIONS="1.4.4 1.5.4 1.9.2 2.1.0.0 2.2.1.0"
     DOCKER_IMAGES="ubuntu:12.04 ubuntu:16.04 debian:7"
     sh -x
 
