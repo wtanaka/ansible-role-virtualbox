@@ -1,6 +1,8 @@
 ---
 - name: Install redhat-lsb
   sudo: yes
+  register: result_redhat_lsb
+  until: result_redhat_lsb|success
   yum:
     name: redhat-lsb
     state: present
@@ -17,8 +19,8 @@
   yum:
     name: "{{ epel_repo_url }}"
     state: present
-  register: result
-  until: '"failed" not in result'
+  register: result_epel_release
+  until: result_epel_release|success
   retries: 5
   delay: 10
   when: not epel_repofile_result.stat.exists
