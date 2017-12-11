@@ -16,12 +16,11 @@
 
 - name: Install EPEL repo.
   sudo: yes
-  yum:
-    name: "{{ epel_repo_url }}"
-    state: present
   register: result_epel_release
   until: result_epel_release|success
+  yum:
+    name: epel-release
+    state: present
   retries: 5
   delay: 10
   when: not epel_repofile_result.stat.exists
-
