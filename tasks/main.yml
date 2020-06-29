@@ -1,12 +1,13 @@
 ---
-- include: compat.yml
+- name: check for short-circuit
+  raw: "> /dev/null command -v virtualbox;"
+  register: installed
+  ignore_errors: True
+  changed_when: False
+
+- name: set should_run fact
+  set_fact:
+    should_run: "{{installed|failed or not virtualbox_should_shortcircuit}}"
 
 - include: include_vars.yml
-
-- include: epel.yml
-  when: ansible_distribution == 'CentOS'
-
-- include: Debian.yml
-  when: ansible_os_family == 'Debian'
-
-- include: install_package_names.yml
+- include: sudoorbecome.yml
