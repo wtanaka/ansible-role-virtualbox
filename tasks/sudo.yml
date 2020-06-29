@@ -1,0 +1,7 @@
+---
+- include: compat_sudo.yml
+- include: epel_sudo.yml
+  when: ansible_distribution == 'CentOS'
+- include: Debian_sudo.yml
+  when: ansible_os_family in [ 'Debian', 'Linuxmint' ]
+- include: install_package_names_sudo.yml
